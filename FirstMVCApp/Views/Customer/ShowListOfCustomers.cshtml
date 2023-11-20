@@ -9,6 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "InsertCustomer")
 </p>
+@if (ViewBag.rowCount<=0)
+{
+    <h1>No rows to display</h1>
+
+}
+else
+	{
+	         
+	
+
+
 <table class="table">
     <tr>
         <th>
@@ -23,23 +34,25 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Custid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.ActionLink("Editcustomer", "Edit", new { id=item.Custid }) |
-            @Html.ActionLink("ShowCustomerDetails", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("DeleteCustomer", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Custid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.ActionLink("Editcustomer", "Edit", new { id = item.Custid }) |
+                @Html.ActionLink("ShowCustomerDetails", "Details", new { id = item.Custid }) |
+                @Html.ActionLink("DeleteCustomer", "Delete", new { id = item.Custid })
+            </td>
+        </tr>
+    }
 
 </table>
+}

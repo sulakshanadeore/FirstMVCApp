@@ -34,6 +34,14 @@ namespace FirstMVCApp.Controllers
             return RedirectToAction("ShowListOfCustomers");
         }
 
+
+        public ActionResult Details(int id)
+        {
+            CustomerModel customer = modelList.Find(c => c.Custid == id);
+            return View(customer);
+
+        }
+
         public ActionResult Edit(int id)
         {
             CustomerModel customer=modelList.Find(c => c.Custid == id);
@@ -48,11 +56,31 @@ namespace FirstMVCApp.Controllers
             return RedirectToAction("ShowListOfCustomers");
         }
 
+        public ActionResult Delete(int id)
+        {
+            CustomerModel customer = modelList.Find(c => c.Custid == id);
+            modelList.Remove(customer);
+            return RedirectToAction("ShowListOfCustomers");
+        }
 
 
         public ActionResult ShowListOfCustomers()
         {
-            return View(modelList);
+            //if (modelList.Count <=0)
+            //{
+            //    string s = "There are no customers to show now!!!";
+            //    //Pass the data(string) Controller(ShowListOfCustomers) Action to the view(ShowListOfCustomers)
+
+            //    ViewBag.message = s;
+
+            //}
+            int noOfRows=modelList.Count;
+            ViewBag.rowCount = noOfRows;
+
+            
+                return View(modelList);
+            
+            
 
         }
 
