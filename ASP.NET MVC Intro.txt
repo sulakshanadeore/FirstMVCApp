@@ -1,0 +1,353 @@
+ASP.NET MVC
+----------
+In terms of architecture, asp.net and asp.net mvc is completey different.
+What is ASP.NET MVC?
+is a architeture pattern given by microsoft to achieve/solve the problem of "Separation of Concerns".
+
+ASP.NET----> Developer---> aspx.cs
+	     Designer----> events which are available in asp.net so that the functionality  can be achieved.
+
+separation of concern between the designer and developer lacked/was not available.
+
+
+       1) Designer and developer work together but not responsible/dependent on each other.
+       2) Designing--- HTML,CSS, Bootstrap
+	 Development----> C#
+
+	Backend Dev			Frontend Designer           BackEnd Developer
+	*****************************************************************************
+MVC----> Model  			View                        Controller
+         Business			UI				Code
+	Logic
+
+*************************************************************************************************************************************************
+		USER									SERVER
+
+A) When the user requests a page--------> POST					www.google.com
+
+(GET) Login page							1) When the server(developer) give the user the login page.------> 
+
+B) Enters the userid & password , sends it to validate(POST)          2) Receives the data from the user(GET)
+
+
+
+
+
+
+
+Controller is called the traffic cop.
+
+
+
+Controller will take the data from the user----->
+		UserModel user=new USerModel();
+                  user.userid=Request["userid]
+                   user.password=Request["password"]
+
+		Ado.net code------> Stored Procedure Called---->(user.userid,user.password)--------> return Valid/Invalid
+		
+		if(valid)
+		{
+		Session[userid]=userid
+		Redirect to Next PAge(Session page)
+
+		}
+		else
+		{
+
+		Show the Login page
+		}
+-----------------------------------------------------------------------------------------------------------------
+
+ASP.NET MVC Project
+-------------------
+
+1) Routing---------> route(path)
+Request is recived it is taken by the controller-------->route has decided that everything will come to the controller first.	
+				Route is defined in the Route.config file of the application, and it is having the default route of the app, 
+		
+		Default Route: Controller/Action/id
+
+	id----optional parameter
+
+		Home/Login------------------------correct
+		I will get the Login Page
+		Enterd data on the login page---clicked login button(Submit)
+
+
+
+		HomeControllerXXXXXXXX
+
+
+
+		Customer/InsertCustomer
+		I will get the InsertCustomerPage
+
+
+
+
+	Controller Folder
+		HomeController Class{
+1 controller-- Multiple Action(each action will return ActionResult)
+
+//Index action returns you a view 
+//ActionResult-----> is a return type
+//Every action by default is a "GET action".
+If you want a post action, we need to define a post action.
+How? by putting a [Post]/[HttpPost] attribute over the action signature.
+
+			//GET
+			ActionResult Index()
+			{
+			return View();//UI
+					
+			}
+Wheneve the user comes tot the app, he will GET a login page
+
+		//GET
+		ActionResult Login()
+		{
+		return View
+		}
+
+
+		[HttpPost]---submit button post to the server
+		ActionResult Login(string userid, string password)
+		{
+		//check userid & password
+		return View();
+		}
+
+              ActionResult Welcome()
+		{
+
+		}
+		ActionResult Calculator()
+		{
+
+		}
+
+	
+		
+}
+
+Customer/Calculator
+		CustomerController Class
+		{
+		//working of you entity
+		ActionResult InsertCustomer()
+		{
+		return View();
+		}
+
+		ActionResult Calculator()
+		{
+		
+		}
+
+		
+		ActionResult UpdateCustomer()
+		{
+	return View()
+		}
+		ActionResult DeleteCustomer()
+		{
+return View();
+		}
+
+		ContentResult GreetCustomer()
+		{
+		string j=AllGreetings();
+		return j;
+		}
+
+		[NonAction]
+		public static string AllGreetings()
+		{
+		string s="Good day,Have a nice day";
+	
+		}
+
+
+
+
+
+
+	
+		JsonResult FindCustomer(int custid)
+		{
+		Customer c=new Customer();
+		c.custid=1;	
+		c.custname="abc";
+		return JsonREsult(c);
+		
+		}
+
+		
+
+		}
+		
+		ProductsController Class
+		{
+		ActionResult Calculator()
+		{
+		return View();
+		}
+		}
+		InvoicesController  Class
+		EmployeesController Class
+
+
+	Models(Classes)----->
+class	CustomerModel 
+{
+prop---custid
+	custname
+	city
+	coutnry
+	state.......
+
+
+
+}
+
+
+	Views Folder
+	(Now Subfolders below)
+		Home
+			Login.cshtml
+
+			
+		
+		Customer
+			InsertCustomer.cshtml
+			UpdateCustomer.cshtml
+			DeleteCustomer.cshtml
+			findCustomer.cshtml
+
+		Products
+			
+		Invoices
+
+
+		Employees
+			Insertemployee.cshtml	
+			Updateemployee.cshtml
+----------------------------
+	Shared
+		SignUp.cshtml
+		Error.cshtml
+		Welcome.cshtml
+		ShowProducts.cshtml
+		Calculator.cshtml
+		LayoutPage.cshtml
+
+Home----->Index
+Home/Index----Index
+customer--->Customer indedx
+customer/index----->customer index
+
+
+
+
+Home Page------> Links which can take me to other parts of the app
+
+
+abstract class ActionResult----absolutely correct to say actionresult
+ViewResult concrete class
+
+
+
+Abstract class ActionREsult(Parent)
+{
+
+}
+
+
+class ViewResult:ActionResult(Child)
+{
+
+
+}
+
+//Content---string
+class ContentResult:ActionResult
+{
+
+
+}
+
+class JsonResult:ACtionResult
+{
+
+
+
+}
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) Folder structure
+3) GET & POST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
